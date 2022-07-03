@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<title>Day 6 - Data, Conditionals, Loops</title>
+	<meta content="
+          
+              JavaScript Data Types, Conditionals &amp; For Loops
+          " name="description" />
+	<link href="/favicon.ico" rel="shortcut icon" />
+	<link href="//code.getmdl.io/1.3.0/material.indigo-yellow.min.css" rel="stylesheet" />
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<script defer="" src="//code.getmdl.io/1.2.1/material.min.js"></script>
+	<style>
+	html,
+	body {
+		font-family: 'Roboto', 'Helvetica', sans-serif;
+		margin: 0;
+		padding: 0
+	}
+	
+	#verification_sent {
+		display: None
+	}
+	
+	.cssix-intro.mdl-card {
+		width: 99%;
+		margin-bottom: 2em
+	}
+	
+	.cssix-intro.mdl-card>.mdl-card__supporting_text {
+		padding: 1em
+	}
+	
+	.mdl-layout__header-row h3 a {
+		color: white;
+		text-decoration: none
+	}
+	
+	#cssilogo_header {
+		content: url('/cssilogo.png');
+		width: 80%
+	}
+	
+	.admin_nav_link {
+		color: red
+	}
+	
+	.cssi-main {
+		overflow-y: visible!important;
+		overflow-x: visible!important
+	}
+	
+	.mdl-cssix .mdl-layout__header-row {
+		padding-left: 40px
+	}
+	
+	.mdl-cssix .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
+		font-size: inherit;
+		padding-left: 12px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar-button {
+		display: none
+	}
+	
+	.mdl-cssix .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
+		display: none
+	}
+	
+	.mdl-cssix .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar,
+	.mdl-cssix .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
+		overflow: visible
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar-container {
+		height: 64px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar {
+		padding: 0;
+		padding-left: 16px;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar .mdl-layout__tab {
+		height: 64px;
+		line-height: 64px;
+		color: white
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+		height: 4px
+	}
+	
+	.mdl-cssix main>.mdl-layout__tab-panel {
+		padding: 8px;
+		padding-top: 48px
+	}
+	
+	.mdl-layout__tab#header_logout {
+		background-color: red
+	}
+	
+	.mdl-cssix .mdl-card {
+		height: auto;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column
+	}
+	
+	.mdl-cssix .mdl-card>* {
+		height: auto
+	}
+	
+	.mdl-cssix .mdl-card .mdl-card__supporting-text {
+		margin: 40px;
+		-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		padding: 0;
+		color: inherit;
+		width: calc(100% - 80px)
+	}
+	
+	.mdl-cssix .mdl-card__supporting-text h4 {
+		margin-top: 0;
+		margin-bottom: 20px
+	}
+	
+	.mdl-cssix .mdl-card__actions {
+		margin: 0;
+		padding: 4px 40px;
+		color: inherit
+	}
+	
+	.mdl-cssix .mdl-card__actions a {
+		color: #00BCD4;
+		margin: 0
+	}
+	
+	.mdl-cssix .mdl-card__actions a:hover,
+	.mdl-cssix .mdl-card__actions a:active {
+		color: inherit;
+		background-color: transparent
+	}
+	
+	.mdl-cssix .mdl-card__supporting-text+.mdl-card__actions {
+		border-top: 1px solid rgba(0, 0, 0, 0.12)
+	}
+	
+	.mdl-cssix #add {
+		position: absolute;
+		right: 40px;
+		top: 36px;
+		z-index: 999
+	}
+	
+	.mdl-list__item {
+		min-height: .4em;
+		padding: .3em
+	}
+	
+	.material-icons.md-18 {
+		font-size: 18px
+	}
+	
+	.material-icons.md-24 {
+		font-size: 24px
+	}
+	
+	.material-icons.md-36 {
+		font-size: 36px
+	}
+	
+	.material-icons.md-48 {
+		font-size: 48px
+	}
+	
+	.post-list .toc_icon {
+		vertical-align: middle;
+		margin: .1em 1em
+	}
+	
+	.mdl-cssix .mdl-layout__content section:not(:last-of-type) {
+		position: relative;
+		margin-bottom: 48px
+	}
+	
+	.mdl-cssix section.section--center {
+		max-width: 860px
+	}
+	
+	.mdl-cssix #features section.section--center {
+		max-width: 620px
+	}
+	
+	.mdl-cssix section>header {
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center
+	}
+	
+	.mdl-cssix section>.section__play-btn {
+		min-height: 200px
+	}
+	
+	.mdl-cssix section>header>.material-icons {
+		font-size: 3rem
+	}
+	
+	.mdl-cssix section>button {
+		position: absolute;
+		z-index: 99;
+		top: 8px;
+		right: 8px
+	}
+	
+	.mdl-cssix section .section__circle {
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-justify-content: flex-start;
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+		-webkit-flex-grow: 0;
+		-ms-flex-positive: 0;
+		flex-grow: 0;
+		-webkit-flex-shrink: 1;
+		-ms-flex-negative: 1;
+		flex-shrink: 1
+	}
+	
+	.mdl-cssix section .section__text {
+		-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		-webkit-flex-shrink: 0;
+		-ms-flex-negative: 0;
+		flex-shrink: 0;
+		padding-top: 8px
+	}
+	
+	.mdl-cssix section .section__text h5 {
+		font-size: inherit;
+		margin: 0;
+		margin-bottom: .5em
+	}
+	
+	.mdl-cssix section .section__text a {
+		text-decoration: none
+	}
+	
+	.mdl-cssix section .section__circle-container>.section__circle-container__circle {
+		width: 64px;
+		height: 64px;
+		border-radius: 32px;
+		margin: 8px 0
+	}
+	
+	.mdl-cssix section.section--footer .section__circle--big {
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+		margin: 8px 32px
+	}
+	
+	.mdl-cssix .is-small-screen section.section--footer .section__circle--big {
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+		margin: 8px 16px
+	}
+	
+	.mdl-cssix section.section--footer {
+		padding: 64px 0;
+		margin: 0 -8px -8px -8px
+	}
+	
+	.mdl-cssix section.section--center .section__text:not(:last-child) {
+		border-bottom: 1px solid rgba(0, 0, 0, .13)
+	}
+	
+	.mdl-cssix .mdl-card .mdl-card__supporting-text>h3:first-child {
+		margin-bottom: 24px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-panel:not(#overview) {
+		background-color: white
+	}
+	
+	.mdl-cssix #features section {
+		margin-bottom: 72px
+	}
+	
+	.mdl-cssix #features h4,
+	#features h5 {
+		margin-bottom: 16px
+	}
+	
+	.mdl-cssix .toc {
+		border-left: 4px solid #C1EEF4;
+		margin: 24px;
+		padding: 0;
+		padding-left: 8px;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column
+	}
+	
+	.mdl-cssix .toc h4 {
+		font-size: .9rem;
+		margin-top: 0
+	}
+	
+	.mdl-cssix .toc a {
+		color: #4DD0E1;
+		text-decoration: none;
+		font-size: 16px;
+		line-height: 28px;
+		display: block
+	}
+	
+	.mdl-cssix .mdl-menu__container {
+		z-index: 99
+	}
+	
+	.cssix-content {
+		border-radius: 2px;
+		padding: 80px 56px;
+		margin-bottom: 16px
+	}
+	
+	.is-small-screen .cssix-content {
+		padding: 0 8px 16px 12px
+	}
+	
+	.cssix-content a {
+		color: #03a9f4!important
+	}
+	
+	div.instructor {
+		border: 2px solid red;
+		border-radius: 12px;
+		padding: 10px
+	}
+	
+	div.instructor::before {
+		content: "Instructor Notes(The students will not see this content):";
+		display: block;
+		color: red;
+		font-weight: bold
+	}
+	
+	a.instructor-notes-link {
+		color: green!important
+	}
+	
+	div.unpublished {
+		border: 2px solid green;
+		border-radius: 12px;
+		padding: 10px;
+		background-color: #deffd1
+	}
+	
+	div.unpublished::before {
+		content: "This content is not released to students yet";
+		color: red;
+		font-weight: bold
+	}
+	
+	a.unpublished-link {
+		color: red!important
+	}
+	
+	a.next {
+		float: right
+	}
+	
+	.post-content img {
+		width: 50%;
+		display: block;
+		margin: auto
+	}
+	
+	.post-content img.large_img {
+		width: 80%;
+		display: block;
+		margin: auto
+	}
+	
+	.is-small-screen .mdl-layout__tab-bar-container {
+		display: none
+	}
+	
+	.mdl-layout.is-upgraded .mdl-layout__tab.is-active {
+		color: yellow;
+		font-weight: bold
+	}
+	
+	.mdl-layout__tab.admin_link {
+		background-color: #c71414
+	}
+	
+	.mdl-layout__header .mdl-layout__drawer-button {
+		color: yellow!important
+	}
+	
+	. .mdl-mini-footer {
+		border-top: 1px solid #ccc;
+		background-color: inherit!important;
+		padding: 8px 16px
+	}
+	
+	footer .lockup {
+		padding-left: 15px;
+		padding-top: 10px
+	}
+	
+	.lockup-logo,
+	.lockup-text {
+		display: inline-block
+	}
+	
+	.va {
+		vertical-align: middle;
+		line-height: 0
+	}
+	
+	.lockup-logo {
+		width: 74px;
+		height: 24px;
+		background-image: url(https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_74x24dp.png);
+		background-size: 74px 24px
+	}
+	
+	.lockup-logo.lockup-dark {
+		background-image: url(https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_dark_color_74x24dp.png);
+		opacity: .54
+	}
+	
+	@media(max-width:760px) {
+		footer .lockup {
+			padding-top: 0
+		}
+	}
+	
+	.answer {
+		display: none;
+		border: 2px solid green;
+		border-radius: 12px;
+		padding: 1em
+	}
+	
+	.hide_answer.mdl-button.mdl-js-button {
+		display: none;
+		!important
+	}
+	
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	blockquote,
+	pre,
+	hr,
+	dl,
+	dd,
+	ol,
+	ul,
+	figure {
+		margin: 0;
+		padding: 0
+	}
+	
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 1.5;
+		font-weight: 300;
+		color: #111;
+		background-color: yellow;
+		-webkit-text-size-adjust: 100%
+	}
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	blockquote,
+	pre,
+	ul,
+	ol,
+	dl,
+	figure,
+	.highlight {
+		margin-bottom: 15px
+	}
+	
+	img {
+		max-width: 100%;
+		vertical-align: middle;
+		display: block
+	}
+	
+	figure>img {
+		display: block
+	}
+	
+	figcaption {
+		font-size: 14px
+	}
+	
+	ul,
+	ol {
+		margin-left: 30px
+	}
+	
+	li>ul,
+	li>ol {
+		margin-bottom: 0
+	}
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 300
+	}
+	
+	a {
+		color: #2a7ae2;
+		text-decoration: none
+	}
+	
+	a:visited {
+		color: #1756a9
+	}
+	
+	a:hover {
+		color: #111;
+		text-decoration: underline
+	}
+	
+	blockquote {
+		color: #828282;
+		border-left: 4px solid #e8e8e8;
+		padding-left: 15px;
+		font-size: 18px;
+		letter-spacing: -1px;
+		font-style: italic
+	}
+	
+	blockquote>:last-child {
+		margin-bottom: 0
+	}
+	
+	pre,
+	code {
+		font-size: 15px;
+		border: 1px solid #e8e8e8;
+		border-radius: 3px;
+		background-color: #eef
+	}
+	
+	code {
+		padding: 1px 5px
+	}
+	
+	pre {
+		padding: 8px 12px;
+		overflow-x: scroll
+	}
+	
+	pre>code {
+		border: 0;
+		padding-right: 0;
+		padding-left: 0
+	}
+	
+	.wrapper {
+		max-width: -webkit-calc(800px -(30px * 2));
+		max-width: calc(800px -(30px * 2));
+		margin-right: auto;
+		margin-left: auto;
+		padding-right: 30px;
+		padding-left: 30px
+	}
+	
+	@media screen and (max-width:800px) {
+		.wrapper {
+			max-width: -webkit-calc(800px -(30px));
+			max-width: calc(800px -(30px));
+			padding-right: 15px;
+			padding-left: 15px
+		}
+	}
+	
+	.footer-col-wrapper:after,
+	.wrapper:after {
+		content: "";
+		display: table;
+		clear: both
+	}
+	
+	.icon>svg {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		vertical-align: middle
+	}
+	
+	.icon>svg path {
+		fill: #828282
+	}
+	
+	.site-header {
+		border-top: 5px solid #424242;
+		border-bottom: 1px solid #e8e8e8;
+		min-height: 56px;
+		position: relative
+	}
+	
+	.site-title {
+		font-size: 26px;
+		line-height: 56px;
+		letter-spacing: -1px;
+		margin-bottom: 0;
+		float: left
+	}
+	
+	.site-title,
+	.site-title:visited {
+		color: #424242
+	}
+	
+	.sidebar-nav {
+		float: left;
+		border-right: 1px solid #e8e8e8
+	}
+	
+	.site-nav {
+		float: right;
+		line-height: 56px
+	}
+	
+	.site-nav .menu-icon {
+		display: none
+	}
+	
+	.site-nav .page-link {
+		color: #111;
+		line-height: 1.5
+	}
+	
+	.site-nav .page-link:not(:first-child) {
+		margin-left: 20px
+	}
+	
+	@media screen and (max-width:600px) {
+		.site-nav {
+			position: absolute;
+			top: 9px;
+			right: 30px;
+			background-color: yellow;
+			border: 1px solid #e8e8e8;
+			border-radius: 5px;
+			text-align: right
+		}
+		.site-nav .menu-icon {
+			display: block;
+			float: right;
+			width: 36px;
+			height: 26px;
+			line-height: 0;
+			padding-top: 10px;
+			text-align: center
+		}
+		.site-nav .menu-icon>svg {
+			width: 18px;
+			height: 15px
+		}
+		.site-nav .menu-icon>svg path {
+			fill: #424242
+		}
+		.site-nav .trigger {
+			clear: both;
+			display: none
+		}
+		.site-nav:hover .trigger {
+			display: block;
+			padding-bottom: 5px
+		}
+		.site-nav .page-link {
+			display: block;
+			padding: 5px 10px
+		}
+	}
+	
+	.site-footer {
+		border-top: 1px solid #e8e8e8;
+		padding: 30px 0
+	}
+	
+	.footer-heading {
+		font-size: 18px;
+		margin-bottom: 15px
+	}
+	
+	.contact-list,
+	.social-media-list {
+		list-style: none;
+		margin-left: 0
+	}
+	
+	.footer-col-wrapper {
+		font-size: 15px;
+		color: #828282;
+		margin-left: -15px
+	}
+	
+	.footer-col {
+		float: left;
+		margin-bottom: 15px;
+		padding-left: 15px
+	}
+	
+	.footer-col-1 {
+		width: -webkit-calc(35% -(30px / 2));
+		width: calc(35% -(30px / 2))
+	}
+	
+	.footer-col-2 {
+		width: -webkit-calc(20% -(30px / 2));
+		width: calc(20% -(30px / 2))
+	}
+	
+	.footer-col-3 {
+		width: -webkit-calc(45% -(30px / 2));
+		width: calc(45% -(30px / 2))
+	}
+	
+	@media screen and (max-width:800px) {
+		.footer-col-1,
+		.footer-col-2 {
+			width: -webkit-calc(50% -(30px / 2));
+			width: calc(50% -(30px / 2))
+		}
+		.footer-col-3 {
+			width: -webkit-calc(100% -(30px / 2));
+			width: calc(100% -(30px / 2))
+		}
+	}
+	
+	@media screen and (max-width:600px) {
+		.footer-col {
+			float: none;
+			width: -webkit-calc(100% -(30px / 2));
+			width: calc(100% -(30px / 2))
+		}
+	}
+	
+	.page-content {
+		padding: 30px 0
+	}
+	
+	.page-heading {
+		font-size: 20px
+	}
+	
+	.post-list {
+		margin-left: 0;
+		list-style: none;
+		display: block;
+		flex-wrap: wrap;
+		justify-content: flex-start
+	}
+	
+	.post-list>li {
+		flex-basis: 50%
+	}
+	
+	.post-meta {
+		font-size: 14px;
+		color: #828282
+	}
+	
+	.post-link {
+		display: block;
+		font-size: 1em
+	}
+	
+	.post-header,
+	.post-footer {
+		margin-bottom: 30px
+	}
+	
+	.cssi-post-title {
+		font-size: 42px;
+		letter-spacing: -1px;
+		line-height: 1
+	}
+	
+	@media screen and (max-width:800px) {
+		.cssi-post-title {
+			font-size: 36px
+		}
+	}
+	
+	.cssix-intro h1 {
+		font-size: 24px;
+		line-height: 1
+	}
+	
+	.cssix-intro h2 {
+		font-size: 16px;
+		line-height: 1
+	}
+	
+	.post-content {
+		margin-bottom: 30px
+	}
+	
+	.post-content h2 {
+		font-size: 32px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h2 {
+			font-size: 28px
+		}
+	}
+	
+	.post-content h3 {
+		font-size: 26px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h3 {
+			font-size: 22px
+		}
+	}
+	
+	.post-content h4 {
+		font-size: 20px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h4 {
+			font-size: 18px
+		}
+	}
+	
+	.PageNavigation {
+		font-size: 14px;
+		display: block;
+		width: auto;
+		overflow: hidden
+	}
+	
+	.PageNavigation a {
+		display: block;
+		width: 50%;
+		float: left;
+		margin: 1em 0
+	}
+	
+	.PageNavigation .next {
+		text-align: right
+	}
+	
+	.highlight .c {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .err {
+		color: #a61717;
+		background-color: #e3d2d2
+	}
+	
+	.highlight .k {
+		font-weight: bold
+	}
+	
+	.highlight .o {
+		font-weight: bold
+	}
+	
+	.highlight .cm {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .cp {
+		color: #999;
+		font-weight: bold
+	}
+	
+	.highlight .c1 {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .cs {
+		color: #999;
+		font-weight: bold;
+		font-style: italic
+	}
+	
+	.highlight .gd {
+		color: #000;
+		background-color: #fdd
+	}
+	
+	.highlight .gd .x {
+		color: #000;
+		background-color: #faa
+	}
+	
+	.highlight .ge {
+		font-style: italic
+	}
+	
+	.highlight .gr {
+		color: #a00
+	}
+	
+	.highlight .gh {
+		color: #999
+	}
+	
+	.highlight .gi {
+		color: #000;
+		background-color: #dfd
+	}
+	
+	.highlight .gi .x {
+		color: #000;
+		background-color: #afa
+	}
+	
+	.highlight .go {
+		color: #888
+	}
+	
+	.highlight .gp {
+		color: #555
+	}
+	
+	.highlight .gs {
+		font-weight: bold
+	}
+	
+	.highlight .gu {
+		color: #aaa
+	}
+	
+	.highlight .gt {
+		color: #a00
+	}
+	
+	.highlight .kc {
+		font-weight: bold
+	}
+	
+	.highlight .kd {
+		font-weight: bold
+	}
+	
+	.highlight .kp {
+		font-weight: bold
+	}
+	
+	.highlight .kr {
+		font-weight: bold
+	}
+	
+	.highlight .kt {
+		color: #458;
+		font-weight: bold
+	}
+	
+	.highlight .m {
+		color: #099
+	}
+	
+	.highlight .s {
+		color: #d14
+	}
+	
+	.highlight .na {
+		color: #008080
+	}
+	
+	.highlight .nb {
+		color: #0086B3
+	}
+	
+	.highlight .nc {
+		color: #458;
+		font-weight: bold
+	}
+	
+	.highlight .no {
+		color: #008080
+	}
+	
+	.highlight .ni {
+		color: #800080
+	}
+	
+	.highlight .ne {
+		color: #900;
+		font-weight: bold
+	}
+	
+	.highlight .nf {
+		color: #900;
+		font-weight: bold
+	}
+	
+	.highlight .nn {
+		color: #555
+	}
+	
+	.highlight .nt {
+		color: #000080
+	}
+	
+	.highlight .nv {
+		color: #008080
+	}
+	
+	.highlight .ow {
+		font-weight: bold
+	}
+	
+	.highlight .w {
+		color: #bbb
+	}
+	
+	.highlight .mf {
+		color: #099
+	}
+	
+	.highlight .mh {
+		color: #099
+	}
+	
+	.highlight .mi {
+		color: #099
+	}
+	
+	.highlight .mo {
+		color: #099
+	}
+	
+	.highlight .sb {
+		color: #d14
+	}
+	
+	.highlight .sc {
+		color: #d14
+	}
+	
+	.highlight .sd {
+		color: #d14
+	}
+	
+	.highlight .s2 {
+		color: #d14
+	}
+	
+	.highlight .se {
+		color: #d14
+	}
+	
+	.highlight .sh {
+		color: #d14
+	}
+	
+	.highlight .si {
+		color: #d14
+	}
+	
+	.highlight .sx {
+		color: #d14
+	}
+	
+	.highlight .sr {
+		color: #009926
+	}
+	
+	.highlight .s1 {
+		color: #d14
+	}
+	
+	.highlight .ss {
+		color: #990073
+	}
+	
+	.highlight .bp {
+		color: #999
+	}
+	
+	.highlight .vc {
+		color: #008080
+	}
+	
+	.highlight .vg {
+		color: #008080
+	}
+	
+	.highlight .vi {
+		color: #008080
+	}
+	
+	.highlight .il {
+		color: #099
+	}
+	</style>
+	<link href="http://cssicurriculum.withgoogle.com/day_06/students_day_6.html" rel="canonical" />
+	<link href="http://cssicurriculum.withgoogle.com/feed.xml" rel="alternate" title="Google CSSI" type="application/rss+xml" />
+</head>
+
+<body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-cssix">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+		<header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary mdl-color-text--white">
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+			<div class="mdl-layout__header-row">
+				<a href="/" id="cssilogo_header"></a>
+			</div>
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+			<div class="mdl-layout--large-screen-only mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark mdl-color-text--white"><a class="mdl-layout__tab" href="/introduction.html">Introduction</a><a class="mdl-layout__tab is-active" href="/curriculum.html">Curriculum</a></div>
+		</header>
+		<div class="mdl-layout__drawer"><span class="mdl-layout-title">CSSIx Modules</span>
+			<nav class="mdl-navigation"><a class="mdl-navigation__link" href="/introduction.html">Introduction</a> <a class="mdl-navigation__link is-active" href="/curriculum.html">Curriculum</a></nav>
+		</div>
+		<main class="mdl-layout__content cssi-main">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+				<div class="cssix-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+					<div>
+						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for "chk_student_view"=""><span class="mdl-switch__label">Student View</span>
+							<input class="mdl-switch__input" id="chk_student_view" type="checkbox" />
+						</label>
+					</div>
+					<div class="post">
+						<header class="post-header">
+							<div>
+								<div class="PageNavigation"><a class="prev" href="/day_05/students_day_5.html">« Day 5 - Mini-project 1</a> <a class="next" href="/day_07/students_day_7.html">Day 7 - Language Grid Guessing Game »</a></div>
+							</div>
+						</header>
+						<article class="post-content">
+							<h1 id="javascript-data-types-conditionals--for-loops">JavaScript Data Types, Conditionals &amp; For Loops</h1>
+							<ol>
+								<li><a href="#objectives">Objectives</a></li>
+								<li><a href="#what-were-building">What We’re Building</a></li>
+								<li><a href="#starting-code">Starting Code</a></li>
+								<li><a href="#instructions">Instructions</a></li>
+								<li><a href="#stretch-goals">Stretch Goals</a></li>
+							</ol>
+							<h2 id="objectives">Objectives</h2>
+							<p>You will learn to:</p>
+							<ul>
+								<li>Use core datatypes in JavaScript and store information in variables and collect user input.</li>
+								<li>Use conditionals to respond to specific user inputs.</li>
+								<li>Utilize for loops to perform repetitive tasks without repetitive code.</li>
+							</ul>
+							<p><strong>Key vocabulary: String, Boolean, Variable, Concatenation, Conditional, For Loop</strong></p>
+							<h2 id="what-were-building">What We’re Building</h2>
+							<p>We’re going to create dynamic programs that respond to user input. To do so we’ll need to learn about about JavaScript data types and several powerful programming tools, which will lay the foundation for the awesome things that we’ll build today and throughout this course.</p>
+							<h2 id="starting-code">Starting Code</h2>
+							<p><a href="https://replit.com/@JessicaEdouard/CSSI-2022-Day-6">Starter Code</a></p>
+							<p>Note: If your instructor shared out a replit for your class, you should use that one instead, but if you can’t find it, you can access the course default replit here.</p>
+							<p><a href="https://replit.com/@JessicaEdouard/CSSI-2022-Day-6-Final">Final Code</a></p>
+							<h2 id="instructions">Instructions</h2>
+							<ol>
+								<li>
+									<p>Open and fork the starter code.</p>
+								</li>
+								<li>
+									<p>Use the <code class="language-plaintext highlighter-rouge">let</code> keyword to store the following data in variables for later use. Feel free to customize the values with your favorite artist:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+											<td class="rouge-code"><pre><span class="c1">// Let's store String in the name variable</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Beyonce</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// Let's store a number in the age variable</span>
+<span class="kd">let</span> <span class="nx">age</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+<span class="c1">// This is the THIRD type of data - it's called a boolean, and has only two possible values: true and false</span>
+<span class="kd">let</span> <span class="nx">cool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Examine the code and consider the following:</p>
+									<ul>
+										<li>You can also store the person’s first album title as a string: <code class="language-plaintext highlighter-rouge">let firstAlbum = "Dangerously In Love";</code></li>
+										<li>You can store the number of albums she made as an integer: <code class="language-plaintext highlighter-rouge">let numOfAlbums = 6;</code></li>
+										<li>You can use a boolean variable to store whether Beyonce is a Grammy winner: <code class="language-plaintext highlighter-rouge">let grammyWinner = true;</code></li>
+										<li>A string and a boolean are both words - Notice that a string is always in double quotes <code class="language-plaintext highlighter-rouge">" "</code>, and a boolean is not. the words <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> are keywords that are recognized in javascript and most other programming languages.</li>
+									</ul>
+								</li>
+								<li>
+									<p>Use the <code class="language-plaintext highlighter-rouge">typeof</code> operator to determine the data type stored in <code class="language-plaintext highlighter-rouge">name</code> variable. You can use the <code class="language-plaintext highlighter-rouge">typeof</code> operator to find the data type of a JavaScript variable.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+											<td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">name</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Type the following code:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+											<td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Welcome </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">!</span><span class="dl">"</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>When we run the above scripts, we should see <code class="language-plaintext highlighter-rouge">string</code> in output for the first log as the type of “name” is a string. For the second output, we should see <code class="language-plaintext highlighter-rouge">Welcome Beyonce!</code>. Run the program to see the output (to run the code, open the replit preview and open the JS console. The code will run again every time you refresh the page).</p>
+								</li>
+								<li>
+									<p>Update your code file to contain the following code, then run the script in your console.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+											<td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Welcome </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>You just learned 2 different ways to join strings together. The method of joining strings together using <code class="language-plaintext highlighter-rouge">+</code> signs is called <strong>concatenation</strong>. The use of back ticks in the second example, is called <strong>string formatting</strong>.</p>
+								</li>
+								<li>
+									<p>In the line following ` let name = “Beyonce”<code class="language-plaintext highlighter-rouge">, change</code>Beyonce` to any other string.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+											<td class="rouge-code"><pre><span class="c1">// Let's store String in the name variable</span>
+<span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Beyonce</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">jazzy jazz</span><span class="dl">"</span><span class="p">;</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>If we run this code, nothing will print, because we haven’t printed using the <code class="language-plaintext highlighter-rouge">console.log()</code> method. Run the code <code class="language-plaintext highlighter-rouge">console.log("Welcome " + name + "!")</code> to see the output.</p>
+								</li>
+								<li>
+									<p>Change the <code class="language-plaintext highlighter-rouge">let</code> keyword to <code class="language-plaintext highlighter-rouge">const</code>. When building our virtual petting Zoo we used the <code class="language-plaintext highlighter-rouge">const</code> keyword. Go back to the code and examine when and why we needed to do so.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+											<td class="rouge-code"><pre><span class="c1">// Let's store String in the name variable</span>
+<span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Beyonce</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">jazzy jazz</span><span class="dl">"</span><span class="p">;</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>When running this, we get an error! <code class="language-plaintext highlighter-rouge">const</code> is used to create variables in which you don’t want the value to change, for example a variable to hold PI or an official, unchanged “SIZE” variable needed in your program. <code class="language-plaintext highlighter-rouge">let</code> should be used when you will want to change the variable at some point in your code.</p>
+								</li>
+								<li>
+									<p>Change <code class="language-plaintext highlighter-rouge">const name</code> back to <code class="language-plaintext highlighter-rouge">let name</code> and continue to add the following to your script:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td>
+											<td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Welcome </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">!</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Your name has </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> letters in it!</span><span class="dl">"</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Take a moment to predict the output before running it to see the result.</p>
+								</li>
+								<li>
+									<p>So far we’ve been assigning values to each variable, however, when we build a program we won’t know the user’s name upfront. We’ll have to get that information from the users themselves.</p>
+								</li>
+								<li>
+									<p>Add the following to your script:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+											<td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">What is your name?</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Greetings, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">! Welcome to the program.</span><span class="dl">"</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Predict what will happen when we run this program. Then, run the program and check to see if your prediction matched the output.</p>
+								</li>
+								<li>
+									<p>It’s time to upgrade your program to have it print out a special greeting only for <code class="language-plaintext highlighter-rouge">Beyonce</code>. Comment out <code class="language-plaintext highlighter-rouge">let name = "Jazzy Jazz"</code> and update your Javascript file to include the following:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+											<td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">What is your name?</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">Beyonce</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Welcome, Queen B.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Greetings, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">! Welcome to the program.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Before running the code, to a moment to predict what will happen if the user says their name is <code class="language-plaintext highlighter-rouge">Beyonce</code>, and what will happen if the user gives a different name? Run the program multiple times to test both cases. Be sure to type “Beyonce” with a capital ‘B’.</p>
+								</li>
+								<li>
+									<p>In JavaScript, conditionals, written as <code class="language-plaintext highlighter-rouge">if</code> statements, allow us to build programs that can perform different actions depending on the nature of some data.</p>
+								</li>
+								<li>
+									<p>It’s time to update your program to check for a password as well. Modify the greetings program:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+											<td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">What is your name?</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">Please enter your password.</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">name</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">Beyonce</span><span class="dl">"</span> <span class="o">&amp;&amp;</span> <span class="nx">password</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">Lemonade1</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Welcome, Queen B.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">password</span> <span class="o">!==</span> <span class="dl">"</span><span class="s2">Lemonade1</span><span class="dl">"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">WARNING. Incorrect password.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Greetings, </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">! Welcome to the program.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Run this program with combinations of answers, too, and try to predict the output for each one.</p>
+								</li>
+								<li>
+									<p>While it’s great to have a personal greeting for Beyonce, imagine how long it would take to write a greeting to several people at one time. Here’s an example of a <code class="language-plaintext highlighter-rouge">for</code> loop that would help us do that in 2 lines of code:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+											<td class="rouge-code"><pre><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>A <code class="language-plaintext highlighter-rouge">for</code> loop takes three statements separated by a semicolon. In short, it’s easiest to think of these three statements as the start where…, while…, and go up by…. Reading these three statements for the above example, it would be “Start where i is 0, and keep going while i is less than 7, going up by 1 each time.”</p>
+								</li>
+								<li>
+									<p>In another example, in order to make the <code class="language-plaintext highlighter-rouge">for</code> loop above run ten times, you would have to write <code class="language-plaintext highlighter-rouge">i &lt; 10</code> instead of 7 for the “while…” portion.</p>
+								</li>
+								<li>
+									<p>Remember that the term <code class="language-plaintext highlighter-rouge">i</code> isn’t special or reserved, it’s just the most commonly used iterator. Each of the following options would also work:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td>
+											<td class="rouge-code"><pre><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">cheese</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">cheese</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">;</span> <span class="nx">cheese</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>We can also use the placeholder <code class="language-plaintext highlighter-rouge">i</code> to keep track of our count. If we wanted to count more visibly (instead of behind the scenes), we could do something like this:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td>
+											<td class="rouge-code"><pre><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">i is currently: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Congratulations! You’ve just used a super powerful tool that can help you do a ton of cool things. Let’s explore what else we can do with <code class="language-plaintext highlighter-rouge">for</code> loops.</p>
+								</li>
+								<li>
+									<p>Imagine if you wanted to find the sum of all the numbers between 10 and 20. Here’s how you can do it using a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td>
+											<td class="rouge-code"><pre><span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The sum is currently </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">sum</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The loop is over, and the total is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">sum</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">!</span><span class="dl">"</span><span class="p">);</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Now, it’s time to reveal the secret number checker we saw in the demo shown in class.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+											<td class="rouge-code"><pre><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Type a secret number here, and I'll try to guess it.</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">secretNumber</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">prompt</span><span class="p">(</span><span class="dl">"</span><span class="s2">Pick a single digit number please!</span><span class="dl">"</span><span class="p">));</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">secretNumber</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Looks like it's not </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">, so I'll keep guessing...</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="nx">secretNumber</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">OH! Your number is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+								<li>
+									<p>Play around with the code above and see if you can identify a problem with it. After you have an idea, try running it and testing different numbers.</p>
+								</li>
+							</ol>
+							<h2 id="stretch-goals">Stretch Goals</h2>
+							<p><em>The data types &amp; conditionals challenges are there to help you build your understanding of the concepts covered in today’s lesson. You can start with those challenges first and build your way up to the <code class="language-plaintext highlighter-rouge">for</code> loop challenges. Feel free to start with the <code class="language-plaintext highlighter-rouge">for</code> loop challenges if you feel confident to tackle those right after the lesson.</em></p>
+							<h3 id="mild">Mild</h3>
+							<h4 id="data-types--conditionals">Data Types &amp; Conditionals</h4>
+							<ul>
+								<li>Create a new program which checks if a user is old enough to vote. If the user is 18 years or older they should receive a message that says <code class="language-plaintext highlighter-rouge">You're old enough to vote!</code> Otherwise they should receive <code class="language-plaintext highlighter-rouge">You're not old enough to vote.</code>
+									<ul>
+										<li>Include other age cutoffs for activities like driving, renting a car, or retiring.</li>
+									</ul>
+								</li>
+								<li>Create a program that tests to see if a number is positive or negative.</li>
+							</ul>
+							<h4 id="for-loops">For Loops</h4>
+							<ul>
+								<li>Print out every number 1-100.</li>
+								<li>Print out every number from 50-100.</li>
+								<li>Find the sum of the first 100 numbers.</li>
+								<li>Find the sum of the numbers from 1000 to 2000.</li>
+							</ul>
+							<h3 id="medium">Medium</h3>
+							<h4 id="data-types--conditionals-1">Data Types &amp; Conditionals</h4>
+							<ul>
+								<li>Write a conditional statement that prints the a statement depending on the carSpeed that you input. Your program should account for individuals who are over the speed limit, withing the speed range, and below the minimum speed.
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td>
+											<td class="rouge-code"><pre><span class="c1">// let carSpeed = _____</span>
+<span class="kd">const</span> <span class="nx">maximumSpeed</span> <span class="o">=</span> <span class="mi">70</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">minimumSpeed</span> <span class="o">=</span> <span class="mi">45</span><span class="p">;</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 id="for-loops-1">For Loops</h4>
+							<ul>
+								<li>Print out every perfect square number less than or equal to 100.</li>
+								<li>Print out every number that ends in a 7 from 7-1007.</li>
+								<li>Print out every even number from 1-100.</li>
+								<li>Print out every multiple of three from 1-100.</li>
+							</ul>
+							<h3 id="spicy">Spicy</h3>
+							<h4 id="data-types--conditionals-2">Data Types &amp; Conditionals</h4>
+							<ul>
+								<li>
+									<p>Write a conditional statement that mimics an automatic checkout machine at a store.</p>
+									<div class="language-javascript highlighter-rouge">
+										<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td>
+											<td class="rouge-code"><pre><span class="o">=====</span> <span class="nx">This</span> <span class="nx">example</span> <span class="nx">is</span> <span class="nx">pseudocode</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">it</span> <span class="nx">describes</span> <span class="nx">what</span> <span class="nx">our</span> <span class="nx">challenge</span> <span class="nx">program</span> <span class="nx">should</span> <span class="k">do</span><span class="o">!</span> <span class="o">======</span>
+
+<span class="c1">// if customerPayment is greater than the totalCheckoutCost, calculate the customer's change and print a statement like this:</span>
+<span class="c1">//	Your change is $3.25. Thank you for shopping with us today.</span>
+
+<span class="c1">// if customerPayment is less than the totalCheckoutCost, calculate the remaining balance and print a statement like this:</span>
+<span class="c1">//	There is still $2.75 remaining on your balance.</span>
+
+<span class="c1">// if customerPayment is equal to the totalCheckoutCost, print a statement wishing the customer a nice day.</span>
+<span class="c1">//  Thanks and have a nice day!</span>
+
+
+<span class="c1">// let customerPayment = _______</span>
+<span class="c1">// let totalCheckoutCost = _______</span>
+</pre></td>
+											</tr>
+											</tbody>
+											</table>
+											</code>
+											</pre>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 id="for-loops-2">For Loops</h4>
+							<ul>
+								<li>If you got one grain of rice on day 1, two grains of rice on day 2, and four grains of rice on day 3, and it kept doubling like that, print out a daily report of how much rice you’d receive on each day for 30 days.</li>
+								<li>Print out multiples of two, another list of multiples of three, and then a third list of items which appear in both lists.</li>
+								<li>Print out numbers which are multiples of 3 OR multiples of 2, but not multiples of both.</li>
+								<li>SUPER CHALLENGE: Print out the first 40 numbers in the Fibonacci sequence.</li>
+							</ul>
+						</article>
+						<footer class="post-footer">
+							<hr/>
+							<div class="PageNavigation"><a class="prev" href="/day_05/students_day_5.html">« Day 5 - Mini-project 1</a> <a class="next" href="/day_07/students_day_7.html">Day 7 - Language Grid Guessing Game »</a></div>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="mdl-mini-footer section">
+			<div class="mdl-mini-footer__left-section">
+				<div class="lockup va"><span class="lockup-logo lockup-dark"></span></div>
+			</div>
+			<div class="mdl-mini-footer__right-section">
+				<ul class="mdl-mini-footer__link-list">
+					<li><span id="site_label">Curriculum 2022</span></li>
+					<li>--</li>
+					<li><a href="https://www.google.com/intl/en/about/">About Google</a></li>
+					<li><a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a></li>
+					<li><a href="https://www.google.com/intl/en/policies/terms/">Terms</a></li>
+					<li><a href="#" id="signout_link">Logout</a></li>
+					<li><a href="#" id="forgetme_link">Forget Me</a></li>
+				</ul>
+			</div>
+			<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+			<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+			<link href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" rel="stylesheet" type="text/css" />
+			<script>
