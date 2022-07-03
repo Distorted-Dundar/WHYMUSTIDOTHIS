@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
+	<title>Day 4 - JavaScript Zoo</title>
+	<meta content="
+          
+              There are two ways to report problems with the curriculum:
+          " name="description" />
+	<link href="/favicon.ico" rel="shortcut icon" />
+	<link href="//code.getmdl.io/1.3.0/material.indigo-yellow.min.css" rel="stylesheet" />
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<script defer="" src="//code.getmdl.io/1.2.1/material.min.js"></script>
+	<style>
+	html,
+	body {
+		font-family: 'Roboto', 'Helvetica', sans-serif;
+		margin: 0;
+		padding: 0
+	}
+	
+	#verification_sent {
+		display: None
+	}
+	
+	.cssix-intro.mdl-card {
+		width: 99%;
+		margin-bottom: 2em
+	}
+	
+	.cssix-intro.mdl-card>.mdl-card__supporting_text {
+		padding: 1em
+	}
+	
+	.mdl-layout__header-row h3 a {
+		color: white;
+		text-decoration: none
+	}
+	
+	#cssilogo_header {
+		content: url('/cssilogo.png');
+		width: 80%
+	}
+	
+	.admin_nav_link {
+		color: red
+	}
+	
+	.cssi-main {
+		overflow-y: visible!important;
+		overflow-x: visible!important
+	}
+	
+	.mdl-cssix .mdl-layout__header-row {
+		padding-left: 40px
+	}
+	
+	.mdl-cssix .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
+		font-size: inherit;
+		padding-left: 12px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar-button {
+		display: none
+	}
+	
+	.mdl-cssix .mdl-layout.is-small-screen .mdl-layout__tab-bar .mdl-button {
+		display: none
+	}
+	
+	.mdl-cssix .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar,
+	.mdl-cssix .mdl-layout:not(.is-small-screen) .mdl-layout__tab-bar-container {
+		overflow: visible
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar-container {
+		height: 64px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar {
+		padding: 0;
+		padding-left: 16px;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar .mdl-layout__tab {
+		height: 64px;
+		line-height: 64px;
+		color: white
+	}
+	
+	.mdl-cssix .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+		height: 4px
+	}
+	
+	.mdl-cssix main>.mdl-layout__tab-panel {
+		padding: 8px;
+		padding-top: 48px
+	}
+	
+	.mdl-layout__tab#header_logout {
+		background-color: red
+	}
+	
+	.mdl-cssix .mdl-card {
+		height: auto;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column
+	}
+	
+	.mdl-cssix .mdl-card>* {
+		height: auto
+	}
+	
+	.mdl-cssix .mdl-card .mdl-card__supporting-text {
+		margin: 40px;
+		-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		padding: 0;
+		color: inherit;
+		width: calc(100% - 80px)
+	}
+	
+	.mdl-cssix .mdl-card__supporting-text h4 {
+		margin-top: 0;
+		margin-bottom: 20px
+	}
+	
+	.mdl-cssix .mdl-card__actions {
+		margin: 0;
+		padding: 4px 40px;
+		color: inherit
+	}
+	
+	.mdl-cssix .mdl-card__actions a {
+		color: #00BCD4;
+		margin: 0
+	}
+	
+	.mdl-cssix .mdl-card__actions a:hover,
+	.mdl-cssix .mdl-card__actions a:active {
+		color: inherit;
+		background-color: transparent
+	}
+	
+	.mdl-cssix .mdl-card__supporting-text+.mdl-card__actions {
+		border-top: 1px solid rgba(0, 0, 0, 0.12)
+	}
+	
+	.mdl-cssix #add {
+		position: absolute;
+		right: 40px;
+		top: 36px;
+		z-index: 999
+	}
+	
+	.mdl-list__item {
+		min-height: .4em;
+		padding: .3em
+	}
+	
+	.material-icons.md-18 {
+		font-size: 18px
+	}
+	
+	.material-icons.md-24 {
+		font-size: 24px
+	}
+	
+	.material-icons.md-36 {
+		font-size: 36px
+	}
+	
+	.material-icons.md-48 {
+		font-size: 48px
+	}
+	
+	.post-list .toc_icon {
+		vertical-align: middle;
+		margin: .1em 1em
+	}
+	
+	.mdl-cssix .mdl-layout__content section:not(:last-of-type) {
+		position: relative;
+		margin-bottom: 48px
+	}
+	
+	.mdl-cssix section.section--center {
+		max-width: 860px
+	}
+	
+	.mdl-cssix #features section.section--center {
+		max-width: 620px
+	}
+	
+	.mdl-cssix section>header {
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center
+	}
+	
+	.mdl-cssix section>.section__play-btn {
+		min-height: 200px
+	}
+	
+	.mdl-cssix section>header>.material-icons {
+		font-size: 3rem
+	}
+	
+	.mdl-cssix section>button {
+		position: absolute;
+		z-index: 99;
+		top: 8px;
+		right: 8px
+	}
+	
+	.mdl-cssix section .section__circle {
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		-webkit-justify-content: flex-start;
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+		-webkit-flex-grow: 0;
+		-ms-flex-positive: 0;
+		flex-grow: 0;
+		-webkit-flex-shrink: 1;
+		-ms-flex-negative: 1;
+		flex-shrink: 1
+	}
+	
+	.mdl-cssix section .section__text {
+		-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+		-webkit-flex-shrink: 0;
+		-ms-flex-negative: 0;
+		flex-shrink: 0;
+		padding-top: 8px
+	}
+	
+	.mdl-cssix section .section__text h5 {
+		font-size: inherit;
+		margin: 0;
+		margin-bottom: .5em
+	}
+	
+	.mdl-cssix section .section__text a {
+		text-decoration: none
+	}
+	
+	.mdl-cssix section .section__circle-container>.section__circle-container__circle {
+		width: 64px;
+		height: 64px;
+		border-radius: 32px;
+		margin: 8px 0
+	}
+	
+	.mdl-cssix section.section--footer .section__circle--big {
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+		margin: 8px 32px
+	}
+	
+	.mdl-cssix .is-small-screen section.section--footer .section__circle--big {
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+		margin: 8px 16px
+	}
+	
+	.mdl-cssix section.section--footer {
+		padding: 64px 0;
+		margin: 0 -8px -8px -8px
+	}
+	
+	.mdl-cssix section.section--center .section__text:not(:last-child) {
+		border-bottom: 1px solid rgba(0, 0, 0, .13)
+	}
+	
+	.mdl-cssix .mdl-card .mdl-card__supporting-text>h3:first-child {
+		margin-bottom: 24px
+	}
+	
+	.mdl-cssix .mdl-layout__tab-panel:not(#overview) {
+		background-color: white
+	}
+	
+	.mdl-cssix #features section {
+		margin-bottom: 72px
+	}
+	
+	.mdl-cssix #features h4,
+	#features h5 {
+		margin-bottom: 16px
+	}
+	
+	.mdl-cssix .toc {
+		border-left: 4px solid #C1EEF4;
+		margin: 24px;
+		padding: 0;
+		padding-left: 8px;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column
+	}
+	
+	.mdl-cssix .toc h4 {
+		font-size: .9rem;
+		margin-top: 0
+	}
+	
+	.mdl-cssix .toc a {
+		color: #4DD0E1;
+		text-decoration: none;
+		font-size: 16px;
+		line-height: 28px;
+		display: block
+	}
+	
+	.mdl-cssix .mdl-menu__container {
+		z-index: 99
+	}
+	
+	.cssix-content {
+		border-radius: 2px;
+		padding: 80px 56px;
+		margin-bottom: 16px
+	}
+	
+	.is-small-screen .cssix-content {
+		padding: 0 8px 16px 12px
+	}
+	
+	.cssix-content a {
+		color: #03a9f4!important
+	}
+	
+	div.instructor {
+		border: 2px solid red;
+		border-radius: 12px;
+		padding: 10px
+	}
+	
+	div.instructor::before {
+		content: "Instructor Notes(The students will not see this content):";
+		display: block;
+		color: red;
+		font-weight: bold
+	}
+	
+	a.instructor-notes-link {
+		color: green!important
+	}
+	
+	div.unpublished {
+		border: 2px solid green;
+		border-radius: 12px;
+		padding: 10px;
+		background-color: #deffd1
+	}
+	
+	div.unpublished::before {
+		content: "This content is not released to students yet";
+		color: red;
+		font-weight: bold
+	}
+	
+	a.unpublished-link {
+		color: red!important
+	}
+	
+	a.next {
+		float: right
+	}
+	
+	.post-content img {
+		width: 50%;
+		display: block;
+		margin: auto
+	}
+	
+	.post-content img.large_img {
+		width: 80%;
+		display: block;
+		margin: auto
+	}
+	
+	.is-small-screen .mdl-layout__tab-bar-container {
+		display: none
+	}
+	
+	.mdl-layout.is-upgraded .mdl-layout__tab.is-active {
+		color: yellow;
+		font-weight: bold
+	}
+	
+	.mdl-layout__tab.admin_link {
+		background-color: #c71414
+	}
+	
+	.mdl-layout__header .mdl-layout__drawer-button {
+		color: yellow!important
+	}
+	
+	. .mdl-mini-footer {
+		border-top: 1px solid #ccc;
+		background-color: inherit!important;
+		padding: 8px 16px
+	}
+	
+	footer .lockup {
+		padding-left: 15px;
+		padding-top: 10px
+	}
+	
+	.lockup-logo,
+	.lockup-text {
+		display: inline-block
+	}
+	
+	.va {
+		vertical-align: middle;
+		line-height: 0
+	}
+	
+	.lockup-logo {
+		width: 74px;
+		height: 24px;
+		background-image: url(https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_74x24dp.png);
+		background-size: 74px 24px
+	}
+	
+	.lockup-logo.lockup-dark {
+		background-image: url(https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_dark_color_74x24dp.png);
+		opacity: .54
+	}
+	
+	@media(max-width:760px) {
+		footer .lockup {
+			padding-top: 0
+		}
+	}
+	
+	.answer {
+		display: none;
+		border: 2px solid green;
+		border-radius: 12px;
+		padding: 1em
+	}
+	
+	.hide_answer.mdl-button.mdl-js-button {
+		display: none;
+		!important
+	}
+	
+	body,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	blockquote,
+	pre,
+	hr,
+	dl,
+	dd,
+	ol,
+	ul,
+	figure {
+		margin: 0;
+		padding: 0
+	}
+	
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		line-height: 1.5;
+		font-weight: 300;
+		color: #111;
+		background-color: yellow;
+		-webkit-text-size-adjust: 100%
+	}
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	blockquote,
+	pre,
+	ul,
+	ol,
+	dl,
+	figure,
+	.highlight {
+		margin-bottom: 15px
+	}
+	
+	img {
+		max-width: 100%;
+		vertical-align: middle;
+		display: block
+	}
+	
+	figure>img {
+		display: block
+	}
+	
+	figcaption {
+		font-size: 14px
+	}
+	
+	ul,
+	ol {
+		margin-left: 30px
+	}
+	
+	li>ul,
+	li>ol {
+		margin-bottom: 0
+	}
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 300
+	}
+	
+	a {
+		color: #2a7ae2;
+		text-decoration: none
+	}
+	
+	a:visited {
+		color: #1756a9
+	}
+	
+	a:hover {
+		color: #111;
+		text-decoration: underline
+	}
+	
+	blockquote {
+		color: #828282;
+		border-left: 4px solid #e8e8e8;
+		padding-left: 15px;
+		font-size: 18px;
+		letter-spacing: -1px;
+		font-style: italic
+	}
+	
+	blockquote>:last-child {
+		margin-bottom: 0
+	}
+	
+	pre,
+	code {
+		font-size: 15px;
+		border: 1px solid #e8e8e8;
+		border-radius: 3px;
+		background-color: #eef
+	}
+	
+	code {
+		padding: 1px 5px
+	}
+	
+	pre {
+		padding: 8px 12px;
+		overflow-x: scroll
+	}
+	
+	pre>code {
+		border: 0;
+		padding-right: 0;
+		padding-left: 0
+	}
+	
+	.wrapper {
+		max-width: -webkit-calc(800px -(30px * 2));
+		max-width: calc(800px -(30px * 2));
+		margin-right: auto;
+		margin-left: auto;
+		padding-right: 30px;
+		padding-left: 30px
+	}
+	
+	@media screen and (max-width:800px) {
+		.wrapper {
+			max-width: -webkit-calc(800px -(30px));
+			max-width: calc(800px -(30px));
+			padding-right: 15px;
+			padding-left: 15px
+		}
+	}
+	
+	.footer-col-wrapper:after,
+	.wrapper:after {
+		content: "";
+		display: table;
+		clear: both
+	}
+	
+	.icon>svg {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		vertical-align: middle
+	}
+	
+	.icon>svg path {
+		fill: #828282
+	}
+	
+	.site-header {
+		border-top: 5px solid #424242;
+		border-bottom: 1px solid #e8e8e8;
+		min-height: 56px;
+		position: relative
+	}
+	
+	.site-title {
+		font-size: 26px;
+		line-height: 56px;
+		letter-spacing: -1px;
+		margin-bottom: 0;
+		float: left
+	}
+	
+	.site-title,
+	.site-title:visited {
+		color: #424242
+	}
+	
+	.sidebar-nav {
+		float: left;
+		border-right: 1px solid #e8e8e8
+	}
+	
+	.site-nav {
+		float: right;
+		line-height: 56px
+	}
+	
+	.site-nav .menu-icon {
+		display: none
+	}
+	
+	.site-nav .page-link {
+		color: #111;
+		line-height: 1.5
+	}
+	
+	.site-nav .page-link:not(:first-child) {
+		margin-left: 20px
+	}
+	
+	@media screen and (max-width:600px) {
+		.site-nav {
+			position: absolute;
+			top: 9px;
+			right: 30px;
+			background-color: yellow;
+			border: 1px solid #e8e8e8;
+			border-radius: 5px;
+			text-align: right
+		}
+		.site-nav .menu-icon {
+			display: block;
+			float: right;
+			width: 36px;
+			height: 26px;
+			line-height: 0;
+			padding-top: 10px;
+			text-align: center
+		}
+		.site-nav .menu-icon>svg {
+			width: 18px;
+			height: 15px
+		}
+		.site-nav .menu-icon>svg path {
+			fill: #424242
+		}
+		.site-nav .trigger {
+			clear: both;
+			display: none
+		}
+		.site-nav:hover .trigger {
+			display: block;
+			padding-bottom: 5px
+		}
+		.site-nav .page-link {
+			display: block;
+			padding: 5px 10px
+		}
+	}
+	
+	.site-footer {
+		border-top: 1px solid #e8e8e8;
+		padding: 30px 0
+	}
+	
+	.footer-heading {
+		font-size: 18px;
+		margin-bottom: 15px
+	}
+	
+	.contact-list,
+	.social-media-list {
+		list-style: none;
+		margin-left: 0
+	}
+	
+	.footer-col-wrapper {
+		font-size: 15px;
+		color: #828282;
+		margin-left: -15px
+	}
+	
+	.footer-col {
+		float: left;
+		margin-bottom: 15px;
+		padding-left: 15px
+	}
+	
+	.footer-col-1 {
+		width: -webkit-calc(35% -(30px / 2));
+		width: calc(35% -(30px / 2))
+	}
+	
+	.footer-col-2 {
+		width: -webkit-calc(20% -(30px / 2));
+		width: calc(20% -(30px / 2))
+	}
+	
+	.footer-col-3 {
+		width: -webkit-calc(45% -(30px / 2));
+		width: calc(45% -(30px / 2))
+	}
+	
+	@media screen and (max-width:800px) {
+		.footer-col-1,
+		.footer-col-2 {
+			width: -webkit-calc(50% -(30px / 2));
+			width: calc(50% -(30px / 2))
+		}
+		.footer-col-3 {
+			width: -webkit-calc(100% -(30px / 2));
+			width: calc(100% -(30px / 2))
+		}
+	}
+	
+	@media screen and (max-width:600px) {
+		.footer-col {
+			float: none;
+			width: -webkit-calc(100% -(30px / 2));
+			width: calc(100% -(30px / 2))
+		}
+	}
+	
+	.page-content {
+		padding: 30px 0
+	}
+	
+	.page-heading {
+		font-size: 20px
+	}
+	
+	.post-list {
+		margin-left: 0;
+		list-style: none;
+		display: block;
+		flex-wrap: wrap;
+		justify-content: flex-start
+	}
+	
+	.post-list>li {
+		flex-basis: 50%
+	}
+	
+	.post-meta {
+		font-size: 14px;
+		color: #828282
+	}
+	
+	.post-link {
+		display: block;
+		font-size: 1em
+	}
+	
+	.post-header,
+	.post-footer {
+		margin-bottom: 30px
+	}
+	
+	.cssi-post-title {
+		font-size: 42px;
+		letter-spacing: -1px;
+		line-height: 1
+	}
+	
+	@media screen and (max-width:800px) {
+		.cssi-post-title {
+			font-size: 36px
+		}
+	}
+	
+	.cssix-intro h1 {
+		font-size: 24px;
+		line-height: 1
+	}
+	
+	.cssix-intro h2 {
+		font-size: 16px;
+		line-height: 1
+	}
+	
+	.post-content {
+		margin-bottom: 30px
+	}
+	
+	.post-content h2 {
+		font-size: 32px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h2 {
+			font-size: 28px
+		}
+	}
+	
+	.post-content h3 {
+		font-size: 26px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h3 {
+			font-size: 22px
+		}
+	}
+	
+	.post-content h4 {
+		font-size: 20px
+	}
+	
+	@media screen and (max-width:800px) {
+		.post-content h4 {
+			font-size: 18px
+		}
+	}
+	
+	.PageNavigation {
+		font-size: 14px;
+		display: block;
+		width: auto;
+		overflow: hidden
+	}
+	
+	.PageNavigation a {
+		display: block;
+		width: 50%;
+		float: left;
+		margin: 1em 0
+	}
+	
+	.PageNavigation .next {
+		text-align: right
+	}
+	
+	.highlight .c {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .err {
+		color: #a61717;
+		background-color: #e3d2d2
+	}
+	
+	.highlight .k {
+		font-weight: bold
+	}
+	
+	.highlight .o {
+		font-weight: bold
+	}
+	
+	.highlight .cm {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .cp {
+		color: #999;
+		font-weight: bold
+	}
+	
+	.highlight .c1 {
+		color: #998;
+		font-style: italic
+	}
+	
+	.highlight .cs {
+		color: #999;
+		font-weight: bold;
+		font-style: italic
+	}
+	
+	.highlight .gd {
+		color: #000;
+		background-color: #fdd
+	}
+	
+	.highlight .gd .x {
+		color: #000;
+		background-color: #faa
+	}
+	
+	.highlight .ge {
+		font-style: italic
+	}
+	
+	.highlight .gr {
+		color: #a00
+	}
+	
+	.highlight .gh {
+		color: #999
+	}
+	
+	.highlight .gi {
+		color: #000;
+		background-color: #dfd
+	}
+	
+	.highlight .gi .x {
+		color: #000;
+		background-color: #afa
+	}
+	
+	.highlight .go {
+		color: #888
+	}
+	
+	.highlight .gp {
+		color: #555
+	}
+	
+	.highlight .gs {
+		font-weight: bold
+	}
+	
+	.highlight .gu {
+		color: #aaa
+	}
+	
+	.highlight .gt {
+		color: #a00
+	}
+	
+	.highlight .kc {
+		font-weight: bold
+	}
+	
+	.highlight .kd {
+		font-weight: bold
+	}
+	
+	.highlight .kp {
+		font-weight: bold
+	}
+	
+	.highlight .kr {
+		font-weight: bold
+	}
+	
+	.highlight .kt {
+		color: #458;
+		font-weight: bold
+	}
+	
+	.highlight .m {
+		color: #099
+	}
+	
+	.highlight .s {
+		color: #d14
+	}
+	
+	.highlight .na {
+		color: #008080
+	}
+	
+	.highlight .nb {
+		color: #0086B3
+	}
+	
+	.highlight .nc {
+		color: #458;
+		font-weight: bold
+	}
+	
+	.highlight .no {
+		color: #008080
+	}
+	
+	.highlight .ni {
+		color: #800080
+	}
+	
+	.highlight .ne {
+		color: #900;
+		font-weight: bold
+	}
+	
+	.highlight .nf {
+		color: #900;
+		font-weight: bold
+	}
+	
+	.highlight .nn {
+		color: #555
+	}
+	
+	.highlight .nt {
+		color: #000080
+	}
+	
+	.highlight .nv {
+		color: #008080
+	}
+	
+	.highlight .ow {
+		font-weight: bold
+	}
+	
+	.highlight .w {
+		color: #bbb
+	}
+	
+	.highlight .mf {
+		color: #099
+	}
+	
+	.highlight .mh {
+		color: #099
+	}
+	
+	.highlight .mi {
+		color: #099
+	}
+	
+	.highlight .mo {
+		color: #099
+	}
+	
+	.highlight .sb {
+		color: #d14
+	}
+	
+	.highlight .sc {
+		color: #d14
+	}
+	
+	.highlight .sd {
+		color: #d14
+	}
+	
+	.highlight .s2 {
+		color: #d14
+	}
+	
+	.highlight .se {
+		color: #d14
+	}
+	
+	.highlight .sh {
+		color: #d14
+	}
+	
+	.highlight .si {
+		color: #d14
+	}
+	
+	.highlight .sx {
+		color: #d14
+	}
+	
+	.highlight .sr {
+		color: #009926
+	}
+	
+	.highlight .s1 {
+		color: #d14
+	}
+	
+	.highlight .ss {
+		color: #990073
+	}
+	
+	.highlight .bp {
+		color: #999
+	}
+	
+	.highlight .vc {
+		color: #008080
+	}
+	
+	.highlight .vg {
+		color: #008080
+	}
+	
+	.highlight .vi {
+		color: #008080
+	}
+	
+	.highlight .il {
+		color: #099
+	}
+	</style>
+	<link href="http://cssicurriculum.withgoogle.com/day_04/day_4.html" rel="canonical" />
+	<link href="http://cssicurriculum.withgoogle.com/feed.xml" rel="alternate" title="Google CSSI" type="application/rss+xml" />
+</head>
+
+<body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-cssix">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
+		<header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary mdl-color-text--white">
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+			<div class="mdl-layout__header-row">
+				<a href="/" id="cssilogo_header"></a>
+			</div>
+			<div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+			<div class="mdl-layout--large-screen-only mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark mdl-color-text--white"><a class="mdl-layout__tab" href="/introduction.html">Introduction</a><a class="mdl-layout__tab is-active" href="/curriculum.html">Curriculum</a></div>
+		</header>
+		<div class="mdl-layout__drawer"><span class="mdl-layout-title">CSSIx Modules</span>
+			<nav class="mdl-navigation"><a class="mdl-navigation__link" href="/introduction.html">Introduction</a> <a class="mdl-navigation__link is-active" href="/curriculum.html">Curriculum</a></nav>
+		</div>
+		<main class="mdl-layout__content cssi-main">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+				<div class="cssix-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+					<div>
+						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for "chk_student_view"=""><span class="mdl-switch__label">Student View</span>
+							<input class="mdl-switch__input" id="chk_student_view" type="checkbox" />
+						</label>
+					</div>
+					<div class="post">
+						<header class="post-header">
+							<div>
+								<div class="PageNavigation"><a class="prev" href="/2100_dom_manipulation_intro.html">« JavaScript DOM Manipulation</a> <a class="next" href="/day_05/day_5.html">Day 5 - Mini-Project 1 »</a></div>
+							</div>
+						</header>
+						<div class="instructor">
+							<article class="post-content">
+								<p>There are two ways to report problems with the curriculum:</p>
+								<ol>
+									<li>if you work for Google, use <a href="http://go/cssi-curriculum-bug">go/cssi-curriculum-bug</a></li>
+									<li>if you are working with CSSI Extension, send email to cssi-curriculum-contributors@google.com</li>
+								</ol>
+								<h1 id="javascript-petting-zoo">JavaScript Petting Zoo</h1>
+								<ol>
+									<li><a href="#objectives">Objectives</a></li>
+									<li><a href="#demo">Demo</a></li>
+									<li><a href="#starting-code">Starting Code</a></li>
+									<li><a href="#stepped-solution">Stepped Solution</a></li>
+									<li><a href="#finished-code">Finished Code</a></li>
+									<li><a href="#extensions-for-independent-practice">Extensions for Independent Practice</a></li>
+								</ol>
+								<h2 id="objectives">Objectives</h2>
+								<ul>
+									<li>Students will connect a local JavaScript file within their HTML.</li>
+									<li>Students will use <code class="language-plaintext highlighter-rouge">document.querySelector</code> to access DOM nodes in their JavaScript.</li>
+									<li>Students will use <code class="language-plaintext highlighter-rouge">.addEventListener</code> to add click events to their HTML elements.</li>
+									<li>Students will use <code class="language-plaintext highlighter-rouge">.innerHTML</code> to modify content on their page in response to user interactions.</li>
+								</ul>
+								<p><strong>Key vocabulary: DOM (Document Object Model), Selector, Event, Constant, Variable</strong></p>
+								<p>INSTRUCTOR NOTE: Even though DOM (Document Object Model) is listed as key vocabulary, this could easily evolve into a very time-consuming and intimidating rabbit trail, and it’s not actually explicitly included anywehre in the lecture. To keep things moving, you’ll want to keep your exploration of the Document Object Model as lightweight as possible. Here’s one possible simplified explanation you can share with students:</p>
+								<blockquote>
+									<p>The ‘DOM’ or Document Object Model is a way of thinking about a rendered HTML page - this lets you select individual pieces of your page and interact with them as JavaScript objects, even though they were originally written in HTML. At this stage in your journey, it’s not crucial that you understand every aspect of the DOM (though there is good <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">documentation about the DOM</a> if you want it); you just neeed to know that when we talk about the DOM, we’re usually talking about using JavaScript to interact with our HTML.</p>
+								</blockquote>
+								<p>ADDITIONAL INSTRUCTOR NOTE: You’ll notice that this lesson uses arrow functions as callbacks for event listeners, but it does not make space for much conversation around any of those vocabulary words. You’re advised to touch briefly on the fact that the arrow function will be executed when the event occurs, but not to dive much deeper than that for now. Most of your students are likely to have studied functions in some capacity before this course, and so you’re encouraged to lean on that prior knowledge. If you do feel compelled to introduce functions more officially during this lesson try to emphasize just ONE feature of functions - talking about how they make our code more readable, more abstract, more DRY, and more modular all at once is generally overwhelming, and certainly not necessary to accomplish today’s objectives.</p>
+								<h2 id="demo">Demo</h2>
+								<ol>
+									<li>Present the final version of the site, linked below.
+										<ul>
+											<li>make sure that you’re presenting your whole screen, otherwise the popups may not be visible to students.</li>
+										</ul>
+									</li>
+									<li>Click on the button labeled “Click to pet the baby goat”, and show students the pop-up.</li>
+									<li>Click on the button labeled “Click to pet the bunny”, and show students that the text changes.</li>
+									<li>Click on the button labeled “Click to feed the mama goat”, and show students that the carrot count goes up.</li>
+									<li>Click on the button labeled “Pet the alligator anyways”, and show students that the content of the page changed.</li>
+									<li>Ask students: “What is the big difference between this page and the page we built yesterday?”. Consider asking questions like “which animal’s button do you think has the most complicated code?”
+										<ul>
+											<li>Try to get the students to explain in their own words that this page is <em>interactive</em>.</li>
+											<li>Don’t spend more than a few minutes on this though.</li>
+										</ul>
+									</li>
+								</ol>
+								<h2 id="starting-code">Starting Code</h2>
+								<p><a href="https://replit.com/@JessDouglas/CSSI-2022-Day-4">Starter Code</a></p>
+								<p><a href="https://replit.com/@JessDouglas/CSSI-2022-Day-4-Final">Final Code</a></p>
+								<h2 id="stepped-solution">Stepped Solution</h2>
+								<ol>
+									<li>
+										<p>Fork the repl.it project which contains the lesson’s starter code into your own copy for use during lecture. You can do this by clicking on the project name in the upper-left of the repl.it UI, selecting the 3-dots menu, selecting “Fork”, and then clicking “Confirm”. This will create a new repl.it project with a copy of the starter code. This is the copy that you will edit during lecture.</p>
+									</li>
+									<li>
+										<p>Share the starter code from your newly-remixed repl.it project with students, have them open the preview. They’re likely to notice that the page looks almost finished, but point out that right now none of the buttons do anything.</p>
+									</li>
+									<li>
+										<p>Open the browser’s inspector and show students how to study the HTML. If you haven’t used the inspector at all in the first two days, you’ll want to take extra time to point out that if they mouse over an element in the inspector, the corresponding element will be shown in the browser. Demonstrate the “select an element” tool and show that you can use it to click on an element in the browser to see the corresponding HTML in the inspector.</p>
+									</li>
+									<li>
+										<p>Name that there are roughly 50 elements on the page, and that none of those are added to JavaScript automatically. They will have to be explicitly <strong>selected</strong> if we want to bring them to life. Give students time to try to identify which elements we’ll need to select for interactivity. Students will likely identify the buttons, and will not likely realize we’ll also need the <code class="language-plaintext highlighter-rouge">"status"</code> paragraphs - that’s fine.</p>
+									</li>
+									<li>
+										<p>Show students how to navigate to the JS console in their browsers. Make sure everyone is able to open their JS console before moving on, and pause briefly to explain that the console will be our primary JS debugging tool.</p>
+									</li>
+									<li>
+										<p>Open the JavaScript file and point out that there should be a “script running” message logged to the console, but there isn’t just yet - that’s because we haven’t connected the JavaScript file to our HTML file. Find the <code class="language-plaintext highlighter-rouge">script</code> tag and add <code class="language-plaintext highlighter-rouge">"script.js"</code> to the src attribute so the JavaScript file runs. Confirm that everyone who is coding along sees that message before continuing.</p>
+									</li>
+									<li>
+										<p>Point out that one element has already been <strong>selected</strong> (using a <code class="language-plaintext highlighter-rouge">#</code> to look by ID, just like in CSS) and stored in a constant. If you choose to discuss constants, do so only briefly. Then, add <code class="language-plaintext highlighter-rouge">console.log(button1)</code> and demonstrate how most browsers will not only log a lot of information about the selected element, but they will also highlight the corresponding rendered element on the page when you mouse over it in the console.</p>
+										<ul>
+											<li>Using a <code class="language-plaintext highlighter-rouge">#</code> to select by ID will feel intuitive to students who have had HTML and CSS practice prior to this week, but if most of your students haven’t used CSS before, you may want to pause here and explain why that <code class="language-plaintext highlighter-rouge">#</code> is so important by contrasting it with something like <code class="language-plaintext highlighter-rouge">querySelector(div)</code>.</li>
+										</ul>
+									</li>
+									<li>
+										<p>You can either repeat this process with <code class="language-plaintext highlighter-rouge">querySelector()</code> to select all four buttons, have students do this part independently for practice, or repeat this process each time you get ready to add another event. As long as you have emphasized the word “selected” each time it has been bolded in these instructions, students tend to take to <code class="language-plaintext highlighter-rouge">querySelector()</code> pretty intuitively.</p>
+									</li>
+									<li>
+										<p>Add <code class="language-plaintext highlighter-rouge">button1.addEventListener("click", e =&gt; {})</code>. This is a LOT of code all at once, and it’s glossing over a fair bit. Students generally handle this perfectly well, but it can be helpful to have a planned think-aloud to work in key vocabulary as you type.</p>
+										<ul>
+											<li>For example: “We’re going to take button1 and add an event listener to it. We’ll listen specifically for a <em>click</em> event, and that event will be fed into a function. We’re going to build that function out right here with an arrow, so that event will trigger this block of code between curly braces.”</li>
+											<li>NOTE: While this is technically a <em>callback</em> function, that vocabulary is generally not very helpful for students at this juncture. Consider glossing over that for now and coming back to it when that vocabulary feels more important.
+												<ul>
+													<li>If you still feel compelled to speak on functions, consider keeping your explanation very lightweight, e.g.: “If you’ve studied functions before, then the idea of what we’re doing here is probably familiar, but this arrow syntax may be new to you. Just know that <code class="language-plaintext highlighter-rouge">function() {}</code> and <code class="language-plaintext highlighter-rouge">() =&gt; {}</code> are, for our purposes today, essentially interchangeable - the arrow syntax is a bit newer. If you’re completely new to functions, you can ignore everything I just said. As long as you know that our click event is going to trigger the block of code after the arrow, you’ve got what you need to get through today’s lesson.”</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<p>Inside the arrow function, add <code class="language-plaintext highlighter-rouge">console.log("Button 1 pressed!")</code> and show students that we have our first working button!</p>
+									</li>
+									<li>
+										<p>Add <code class="language-plaintext highlighter-rouge">alert("Meh-eh-eh-eh!")</code> to that first button’s arrow function.</p>
+									</li>
+									<li>
+										<p>Celebrate! The first button is done!</p>
+									</li>
+									<li>
+										<p>Select button2 and store it in a new variable: <code class="language-plaintext highlighter-rouge">const button2 = document.querySelector("#button2");</code></p>
+									</li>
+									<li>
+										<p>Add <code class="language-plaintext highlighter-rouge">button2.addEventListener("click", e =&gt; {})</code>, add a <code class="language-plaintext highlighter-rouge">console.log("Button 2 pressed!")</code>, and then either ask or tell students what else (based on the finished example) should happen when button 2 is pressed.</p>
+									</li>
+									<li>
+										<p>Since we’re going to display the results in the <code class="language-plaintext highlighter-rouge">status2</code> paragraph, we’ll need to select that as well. Add <code class="language-plaintext highlighter-rouge">const status2 = document.querySelector("#status2")</code> to your script and then a <code class="language-plaintext highlighter-rouge">console.log(status2)</code> to confirm that it has been selected.</p>
+									</li>
+									<li>
+										<p>We want to change the <em>inside</em> of the <code class="language-plaintext highlighter-rouge">status2</code> paragraph, so we’ll do that using the <code class="language-plaintext highlighter-rouge">.innerHTML</code> property. This will leave the opening and closing tags intact, but reset the inside to whatever we specify. Add <code class="language-plaintext highlighter-rouge">status2.innerHTML = "Thanks for petting the bunny! He looks really happy!"</code> to your arrow function for button 2.</p>
+									</li>
+									<li>
+										<p>Ask or tell students what’s different about the third button based on what they saw in the finished version. Name that we’re going to need a counter to keep track of the number of carrots. Briefly discuss <code class="language-plaintext highlighter-rouge">let</code> as a way to initialize variables, and add <code class="language-plaintext highlighter-rouge">let carrots = 2</code> to start off with the correct number.</p>
+									</li>
+									<li>
+										<p>Capture <code class="language-plaintext highlighter-rouge">status3</code> in a constant with a <code class="language-plaintext highlighter-rouge">.querySelector()</code>, and console.log it out to make sure it worked.</p>
+									</li>
+									<li>
+										<p>Add the event listener for button 3, test that it’s working with a <code class="language-plaintext highlighter-rouge">console.log("Button 3 pressed!")</code>.</p>
+									</li>
+									<li>
+										<p>Add <code class="language-plaintext highlighter-rouge">carrots = carrots + 1</code> and describe what that will do, and then immediately add <code class="language-plaintext highlighter-rouge">status3.innerHTML = "Coco has had " + carrots + " carrots today!"</code> and discuss what will happen here. Since this is our first exploration of concatenation in this course, it might be worth discussing Strings and how that <code class="language-plaintext highlighter-rouge">+</code> sign is assumed to mean “glue these two things together” whenever JavaScript can’t reasonably sum them.</p>
+									</li>
+									<li>
+										<p>Ask or tell students what’s different about the fourth and final button.</p>
+									</li>
+								</ol>
+								<ul>
+									<li>Note that the fourth button is really just additional practice. If there isn’t time, the fourth button could reasonably be something that some students get to as part of independent practice.</li>
+								</ul>
+								<ol>
+									<li>
+										<p>Since we’re going to be manipulating a much larger chunk of the page, have students add <code class="language-plaintext highlighter-rouge">const zoo = document.querySelector(".container")</code>. Then add <code class="language-plaintext highlighter-rouge">console.log(zoo)</code> to confirm that we’ve done it.</p>
+									</li>
+									<li>
+										<p>Add the fourth button’s event listener and a console.log statement inside it to confirm that the event is firing.</p>
+									</li>
+									<li>
+										<p>Add the below line of code to the event listener’s arrow function.</p>
+									</li>
+								</ol>
+								<div class="language-javascript highlighter-rouge">
+									<div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+										<td class="rouge-code"><pre>  <span class="nx">zoo</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`&lt;h1 class="title"&gt;Due to some dangerous rulebreaking, the petting zoo is temporarily closed&lt;/h1&gt;`</span><span class="p">;</span>
+</pre></td>
+										</tr>
+										</tbody>
+										</table>
+										</code>
+										</pre>
+									</div>
+								</div>
+								<ol>
+									<li>
+										<p>It’s worth pointing out that we’re using backticks for this string instead of quotation marks like we used for the rest. Point out that you can use single quotes, double quotes, and backticks to denote a String in JavaScript, and award a big high five to any student who can figure out why we can’t use double quotes here.</p>
+									</li>
+									<li>
+										<p>Make sure to share the repl.it project that you’ve been working in during the lecture with the students. That will make it easier for anyone who fell behind to get to the same state you’re at. You can do this by just copying &amp; pasting the URL from your browser window.</p>
+									</li>
+								</ol>
+								<h2 id="extensions-for-independent-practice">Extensions for Independent Practice</h2>
+								<h3 id="mild">Mild</h3>
+								<ul>
+									<li>Add a fifth animal! Model it after whichever of the four example animals whose behavior you want to replicate.</li>
+									<li>Change at least one of the example animals to an animal of your choice, like a hamster or a lion. Modify the HTML to reflect that, and modify the event listener as well.</li>
+								</ul>
+								<h3 id="medium">Medium</h3>
+								<ul>
+									<li>Right now the mama goat can eat infinite carrots. That’s not too realistic. Find a way to make her respond differently if she gets too many carrots. Here are some ideas of what that could look like:
+										<ul>
+											<li>Change the message to be something about the dangers of overfeeding, or to show that she doesn’t accept carrots once she’s full.</li>
+											<li>Disable or remove the button.</li>
+											<li>Create an alert.</li>
+										</ul>
+									</li>
+								</ul>
+								<h3 id="spicy">Spicy</h3>
+								<ul>
+									<li>Add another button to each of the animals, and code out corresponding behaviors. The goal is to approximate a pet-keeping simulation. Here are some ideas for what those buttons might look like:
+										<ul>
+											<li>“Play”, which increases a happiness variable, but decreases an energy variable.</li>
+											<li>“Feed”, which increases energy and fullness.</li>
+											<li>“Brush”, which increases happiness and cleanliness.</li>
+										</ul>
+									</li>
+									<li>Break the alligator button into multiple steps - when you first click it, change the button to say “are you sure?” or something similar.</li>
+								</ul>
+							</article>
+						</div>
+						<footer class="post-footer">
+							<hr/>
+							<div class="PageNavigation"><a class="prev" href="/2100_dom_manipulation_intro.html">« JavaScript DOM Manipulation</a> <a class="next" href="/day_05/day_5.html">Day 5 - Mini-Project 1 »</a></div>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="mdl-mini-footer section">
+			<div class="mdl-mini-footer__left-section">
+				<div class="lockup va"><span class="lockup-logo lockup-dark"></span></div>
+			</div>
+			<div class="mdl-mini-footer__right-section">
+				<ul class="mdl-mini-footer__link-list">
+					<li><span id="site_label">Curriculum 2022</span></li>
+					<li>--</li>
+					<li><a href="https://www.google.com/intl/en/about/">About Google</a></li>
+					<li><a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a></li>
+					<li><a href="https://www.google.com/intl/en/policies/terms/">Terms</a></li>
+					<li><a href="#" id="signout_link">Logout</a></li>
+					<li><a href="#" id="forgetme_link">Forget Me</a></li>
+				</ul>
+			</div>
+			<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+			<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+			<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+			<link href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" rel="stylesheet" type="text/css" />
+			<script>
